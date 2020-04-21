@@ -198,30 +198,28 @@ In the return of the render method, we are using a package called react-dropzone
 
 #### Dropzone
 ```js
-<Dropzone 
+<Dropzone
     onDropAccepted={this.getSignedRequest}
-    style={{
-    position: 'relative',
-    width: 200,
-    height: 200,
-    borderWidth: 7,
-    marginTop: 100,
-    borderColor: 'rgb(102, 102, 102)',
-    borderStyle: 'dashed',
-    borderRadius: 5,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 28,
-    }}
-    accept='image/*'
-    multiple={false} >
-    
-    { this.state.isUploading 
-        ?  <GridLoader />
-        : <p>Drop File or Click Here</p>
-    }
-
+    accept="image/*"
+    multiple={false}>
+    {({getRootProps, getInputProps}) => (
+    <div 
+        style = {{
+        position: 'relative',
+        width: 160,
+        height: 80,
+        borderWidth: 5,
+        marginTop: 25,
+        borderColor: 'gray',
+        borderStyle: 'dashed',
+        borderRadius: 5,
+        display: 'inline-block',
+        fontSize: 17,}}
+        {...getRootProps()}>
+        <input {...getInputProps()} />
+        {isUploading ? <GridLoader /> : <p>Drop files here, or click to select files</p>}
+    </div>
+    )}
 </Dropzone>
 ```
  - `onDropAccepted=`The function to run when an acceptable file is accepted or dropped. We have designated that function to be `this.getSignedRequest` which is explained in the next section.
