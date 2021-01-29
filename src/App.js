@@ -75,25 +75,27 @@ class App extends Component {
 
         <Dropzone
           onDropAccepted={this.getSignedRequest}
-          style={{
-            position: 'relative',
-            width: 200,
-            height: 200,
-            borderWidth: 7,
-            marginTop: 100,
-            borderColor: 'rgb(102, 102, 102)',
-            borderStyle: 'dashed',
-            borderRadius: 5,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: 28,
-          }}
           accept="image/*"
-          multiple={false}
-        >
-          {isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}
-        </Dropzone>
+          multiple={false}>
+          {({getRootProps, getInputProps}) => (
+            <div 
+              style = {{
+              position: 'relative',
+              width: 160,
+              height: 80,
+              borderWidth: 5,
+              marginTop: 25,
+              borderColor: 'gray',
+              borderStyle: 'dashed',
+              borderRadius: 5,
+              display: 'inline-block',
+              fontSize: 17,}}
+              {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isUploading ? <GridLoader /> : <p>Drop files here, or click to select files</p>}
+            </div>
+          )}
+         </Dropzone>
       </div>
     );
   }
